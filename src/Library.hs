@@ -122,8 +122,8 @@ sumarHorrorCruxSiCumple postre hechizo mago
 mejorHechizo :: Postre -> Mago -> Hechizo
 mejorHechizo postre mago = masCantidaDeSabores postre (hechizos mago)
 
-
 masCantidaDeSabores :: Postre -> [Hechizo] -> Hechizo
+-- Supongo que no existen los magos que no sepan hechizos
 masCantidaDeSabores _ [a] = a
 masCantidaDeSabores postre (h1:h2:hs)
     | (cantSabores.h1) postre > (cantSabores.h2) postre = masCantidaDeSabores postre (h1:hs)
@@ -135,6 +135,23 @@ infinitosPostres :: [Postre]
 infinitosPostres = tarta:infinitosPostres
 
 infinitosHechizos :: [Hechizo]
-infinitosHechizos = incendio:infinitosHechizos
+infinitosHechizos = incendio:inmobulus:infinitosHechizos
 
-merlin = UnMago infinitosHechizos 
+merlin = UnMago infinitosHechizos 5
+
+{-
+    B) Suponiendo que hay una mesa con infinitos postres, y pregunto si algún hechizo los deja listos ¿Existe alguna consulta que pueda
+    hacer para que me sepa dar una respuesta? Justificar conceptualmente.
+    RTA: En este caso, lazy evaluation no nos ayudaria ya que para saber si todos quedan listos, deberia utilizar un all entonces leeria 
+    la lista entera de  postres (algo imposible si es infinita) para determinar si todos los postres estan listos. Esto no seria posible
+    ya que se quedaria en un bucle infinito.
+    Por otro lado, (aunque seria una trampita) si yo se que la lista de postres repite siempre el mismo postre, como es el caso de la que yo declare,
+    se podria evaluar solo si la cabeza de la fila esta lista. Pero esto solo funcionaria para los casos en los que ya conozco la lista de antemano.
+-}
+
+{-
+    C) Suponiendo que un mago tiene infinitos hechizos ¿Existe algún caso en el que se puede encontrar al mejor hechizo? Justificar conceptualmente.
+    RTA: Al hacer mejorHechizo tarta merlin, me devuelve una funcion, que seria un hechizo pero en el momento de aplicarsela a un postre, rompe el programa.
+    Por lo que me parece que nunca encuentra el mejor hechizo, ya que esta hecha con recursividad y el caso base es cuando queda un solo hechizo, situacion
+    que seria imposible si le paso una lista infinita
+-}
