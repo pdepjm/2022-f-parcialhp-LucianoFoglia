@@ -27,15 +27,16 @@ prueba = UnPostre ["fruta","menta"] 100 25
 prueba2 = UnPostre ["fruta","menta"] 100 25
 otro = UnPostre ["chocolate"] 150 0
 tarta = UnPostre ["manzana"] 250 15
+bizcocho = UnPostre ["alcohol","fruta","crema"] 100 25
 
 -- B) Modelar los hechizos, sabiendo que deberían poderse agregar más sin modificar el código existente. Por ahora existen los siguientes:
 type Hechizo = Postre -> Postre
 
 modificarTemp :: (Number -> Number) -> Postre -> Postre
-modificarTemp modificar postre = postre{temperatura = modificar (temperatura postre)}
+modificarTemp modificador postre = postre{temperatura = modificador (temperatura postre)}
 
 modificarPeso :: (Number -> Number) -> Postre -> Postre
-modificarPeso modificar postre = postre{peso = modificar (peso postre)}
+modificarPeso modificador postre = postre{peso = modificador (peso postre)}
 
 agregarSabor :: String -> Postre -> Postre
 agregarSabor sabor postre = postre{sabores = sabor:sabores postre}
