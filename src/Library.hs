@@ -101,6 +101,7 @@ data Mago = UnMago{
 }deriving (Show,Eq)
 
 messi = UnMago [incendio,wingardiumLeviosa] 7
+cRonaldo = UnMago [diffindo 15,riddikulus "limon",inmobulus] 5
 
 {-
     A) Hacer que un mago asista a la clase de defensa contra las cocinas oscuras y practique con un hechizo sobre un
@@ -146,16 +147,17 @@ infinitosHechizos = incendio:inmobulus:infinitosHechizos
 {-
     B) Suponiendo que hay una mesa con infinitos postres, y pregunto si algún hechizo los deja listos ¿Existe alguna consulta que pueda
     hacer para que me sepa dar una respuesta? Justificar conceptualmente.
+
     RTA: Tomo como que la funcion recibiria una lista de hechizos y una lista de postres. En este caso, lazy evaluation nos ayudaria solo
     si es falso ya que para saber si todos quedan listos, deberia utilizar un any para la lista de hechizos y un all para la lista de postres
-    entonces tendria que leer la lista entera de postres (si es verdadero, algo imposible si es infinita) para determinar si todos los postres
-    estan listos. Por otro lado, si todos los hechizos devuelven por lo menos un postre que no este listo, entonces devolveria False. Ya que todos
-    los all devolverian False. Y el any tambien daria False
+    entonces tendria que leer la lista entera de postres, si es verdadero que ese hechizo los deja listos (algo imposible si es infinita). 
+    Por otro lado, si todos los hechizos devuelven por lo menos un postre que no este listo,  entonces devolveria False. Ya que todos los 
+    all devolverian False. Y el any tambien daria False
 -}
 
 {-
     C) Suponiendo que un mago tiene infinitos hechizos ¿Existe algún caso en el que se puede encontrar al mejor hechizo? Justificar conceptualmente.
+
     RTA: En este caso, lazy evaluation no nos ayudaria ya que para saber el mejor hechizo debe leer la lista entera hasta que quede uno solo. Por lo que
     si es infinita, por mas que vayas sacando hechizos, nunca va a quedar uno solo. No hay ningun caso en el que se pueda encontrar el mejor hechizo.
-    Solo se podria saber (como en el punto anterior) si sabemos que la lista repite siempre el mismo hechizo, entonces devolvemos ese hechizo.` 
 -}
